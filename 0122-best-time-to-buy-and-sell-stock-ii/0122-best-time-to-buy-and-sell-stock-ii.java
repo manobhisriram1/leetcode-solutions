@@ -9,7 +9,7 @@ class Solution {
         int profit = prices[i] - prices[i - 1];
         
         if (profit > 0) {
-            maxProfit += profit;
+            maxProfit = maxProfit+ profit;
         }
     }
     
