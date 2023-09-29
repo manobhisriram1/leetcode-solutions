@@ -1,5 +1,4 @@
 
-
 class Solution {
     public boolean isMonotonic(int[] nums) {
         boolean increasing = true;
@@ -12,6 +11,7 @@ class Solution {
                 increasing = false;
             }
             
+            // If both increasing and decreasing become false, the array is neither increasing nor decreasing
             if (!increasing && !decreasing) {
                 return false;
             }
