@@ -1,57 +1,48 @@
 
 class MyHashMap {
+
     private static final int SIZE = 1000;
-    private LinkedList<Entry>[] buckets;
+    private List<int[]>[] map;
+
     public MyHashMap() {
-        buckets = new LinkedList[SIZE];
+        map = new ArrayList[SIZE];
         for (int i = 0; i < SIZE; i++) {
-            buckets[i] = new LinkedList<Entry>();
+            map[i] = new ArrayList<>();
         }
     }
 
     public void put(int key, int value) {
-        int index = hash(key);
-        LinkedList<Entry> bucket = buckets[index];
-        for (Entry entry : bucket) {
-            if (entry.key == key) {
-                entry.value = value; 
+        int index = key % SIZE;
+        List<int[]> bucket = map[index];
+        for (int[] pair : bucket) {
+            if (pair[0] == key) {
+                pair[1] = value; 
                 return;
             }
         }
-        bucket.add(new Entry(key, value));
+        bucket.add(new int[]{key, value}); 
     }
 
     public int get(int key) {
-        int index = hash(key);
-        LinkedList<Entry> bucket = buckets[index];
-        for (Entry entry : bucket) {
-            if (entry.key == key) {
-                return entry.value; 
+        int index = key % SIZE;
+        List<int[]> bucket = map[index];
+        for (int[] pair : bucket) {
+            if (pair[0] == key) {
+                return pair[1]; 
             }
         }
-        
-        return -1;
+        return -1; 
     }
+
     public void remove(int key) {
-        int index = hash(key);
-        LinkedList<Entry> bucket = buckets[index];
-        for (Entry entry : bucket) {
-            if (entry.key == key) {
-                bucket.remove(entry);
+        int index = key % SIZE;
+        List<int[]> bucket = map[index];
+        for (int i = 0; i < bucket.size(); i++) {
+            int[] pair = bucket.get(i);
+            if (pair[0] == key) {
+                bucket.remove(i); 
                 return;
             }
-        }
-    }
-    private int hash(int key) {
-        return key % SIZE;
-    }
-    private class Entry {
-        int key;
-        int value;
-
-        Entry(int key, int value) {
-            this.key = key;
-            this.value = value;
         }
     }
 }
