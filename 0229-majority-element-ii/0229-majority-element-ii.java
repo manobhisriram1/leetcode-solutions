@@ -1,8 +1,9 @@
 class Solution {
     public List<Integer> majorityElement(int[] nums) {
-        int num1 = 0, num2 = 0, count1 = 0, count2 = 0;
+      
+       int num1 = 0, num2 = 0, count1 = 0, count2 = 0;
 
-        // Step 1: Find potential majority elements
+        // Find potential majority elements
         for (int num : nums) {
             if (num == num1) {
                 count1++;
@@ -20,9 +21,11 @@ class Solution {
             }
         }
 
-        // Step 2: Count actual occurrences of potential majority elements
+        // Reset counters
         count1 = 0;
         count2 = 0;
+
+        // Count actual occurrences of potential majority elements
         for (int num : nums) {
             if (num == num1) {
                 count1++;
@@ -31,7 +34,7 @@ class Solution {
             }
         }
 
-        // Step 3: Check if occurrences are greater than n/3
+        // Find elements appearing more than n/3 times
         List<Integer> result = new ArrayList<>();
         if (count1 > nums.length / 3) {
             result.add(num1);
@@ -43,4 +46,3 @@ class Solution {
         return result;
     }
 }
-   
