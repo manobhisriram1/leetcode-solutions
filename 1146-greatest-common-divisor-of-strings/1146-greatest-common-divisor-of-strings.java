@@ -1,20 +1,20 @@
 class Solution {
-    public String gcdOfStrings(String str1, String str2) {
-  
-   for (int i = Math.min(str1.length(), str2.length()); i > 0; i--) {
-            String candidate = str1.substring(0, i);
-            if (isDivisor(candidate, str1) && isDivisor(candidate, str2)) {
-                return candidate;
-            }
+    
+      public static String gcdOfStrings(String str1, String str2) {
+        if (!(str1 + str2).equals(str2 + str1)) {
+            return "";
         }
-        return "";
+        
+        int gcdLength = gcd(str1.length(), str2.length());
+        return str1.substring(0, gcdLength);
     }
 
-    private static boolean isDivisor(String candidate, String str) {
-        StringBuilder sb = new StringBuilder();
-        while (sb.length() < str.length()) {
-            sb.append(candidate);
+    private static int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = b;
+            b = a % b;
+            a = temp;
         }
-        return sb.toString().equals(str);
+        return a;
     }
 }
